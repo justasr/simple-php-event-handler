@@ -17,7 +17,7 @@ When setting up an event handler refer to the specific handler's documentation o
 ## Usage
 
 ```
-require_once '{PATH TO EVENTS CLASS';
+require_once 'Events.php';
 
 Events::registerEvent('ob_final_edit');
 
