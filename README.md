@@ -21,8 +21,25 @@ require_once '{PATH TO EVENTS CLASS';
 
 Events::registerEvent('ob_final_edit');
 
-Events::registerHandler('ob_final_edit', 'add_website_name' function($params) {
+// One way to register a handler {Params} event name : unique handler id : function closure or name
+Events::registerHandler('ob_final_edit', 'output_modifier_1' function($params) {
     $params[0] = str_replace("{@WEBSITENAME}", "My Website's Name", $params[0]);
     return $params;
 });
+
+// Second way
+function add_website_name($params) {
+    $params[0] = str_replace("{@WEBSITENAME}", "My Website's Name", $params[0]);
+    return $params;
+}
+Events::registerHandler('ob_final_edit', 'output_modifier_1', 'add_website_name');
+
+// Triggering an event
+
+// Custom output buffer handler
+function my_output_buffer_handler($output) {
+    // Code here
+    Events::triggerEvent('ob_final_edit', [$output]);
+    return $output;
+}
 ```
