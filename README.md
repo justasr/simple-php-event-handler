@@ -39,7 +39,7 @@ Events::registerHandler('ob_final_edit', 'output_modifier_1', 'add_website_name'
 // Custom output buffer handler
 function my_output_buffer_handler($output) {
     // Code here
-    Events::triggerEvent('ob_final_edit', [$output]);
+    $output = Events::triggerEvent('ob_final_edit', [$output])[0];
     return $output;
 }
 ```
